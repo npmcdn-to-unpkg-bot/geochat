@@ -2,8 +2,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
+var config = require('./config');
+var logs = require('./logconfig');
 var session = require('./routes/session');
+
+mongoose.connect(config.db.mongodb);
 
 var app = express();
 
@@ -45,8 +49,9 @@ app.use(function(err, req, res, next) {
   });*/
 });
 
-app.listen(3000, function () {
-  console.log("Server is runnning on 3000");
+app.listen(config.server.port, function () {
+  logs.info("Server is runnning on " + config.server.port);
+  console.log("Server is runnning on " + config.server.port);
 });
 
 module.exports = app;
