@@ -1,0 +1,7 @@
+<h5>{{ message }}</h5>
+
+<input type="button" name="btnClick" id="btnClick" ng-click="getHomes()" value=" Click Here " />
+
+<ul ng-repeat="home in homes" ng-show="homes">
+    <li>{{ home.Place }} - {{ home.name }}</li>
+</ul>
