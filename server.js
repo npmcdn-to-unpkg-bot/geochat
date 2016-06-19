@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -7,7 +9,15 @@ var config = require('./config');
 var logs = require('./logconfig');
 var session = require('./routes/session');
 
-mongoose.connect(config.db.mongodb);
+mongoose.connect(config.db.mongodb, (err) => {
+  //to-do, re-factor it. App should react accordingly, when Mongo is up/down
+  if (err) {
+    console.error(err);
+    logs.info(err);
+    //don't exit node.js. Keep running it
+    //process.exit();
+  }
+});
 
 var app = express();
 

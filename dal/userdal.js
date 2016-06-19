@@ -1,3 +1,5 @@
+"use strict";
+
 var UserModel = require('../models/UserModel');
 var logs = require('../logconfig');
 var util = require('../util');

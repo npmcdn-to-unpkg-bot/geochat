@@ -1,3 +1,5 @@
+"use strict";
+
 var csrf 	= require('csurf');
 
 exports.csrfProtection = function() {
