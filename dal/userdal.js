@@ -1,6 +1,8 @@
 var UserModel = require('../models/UserModel');
 var logs = require('../logconfig');
 var util = require('../util');
+var configtext = require('../config-text');
+var apperror = require('../app-error');
 
 var UserService = function () { }
 
@@ -20,10 +22,10 @@ UserService.prototype.Register = function (userInfo, callback) {
     if (err) {
       logs.info(err);
       console.log(err.code);
-      if (err.code.toString() === "11000") {
-          callback({isError: true, error: "Email already exists", data: []});
+      if (err.code.toString() === apperror.mongo_duplicate_column_error) {
+          callback({isError: true, error: configtext.email_exists, data: []});
       }else {
-          callback({isError: true, error: "Error! Please contact administrator", data: []});
+          callback({isError: true, error: configtext.contact_administrator, data: []});
       }
       return;
     }
@@ -37,7 +39,7 @@ UserService.prototype.Login = function (loginInfo, callback) {
   UserModel.findOne({'email': loginInfo.email, "password": loginInfo.password}, function (err, user) {
     if (err) {
       logs.info(err);
-      callback({isError: true, error: "Error! Please contact administrator", data: []});
+      callback({isError: true, error: configtext.contact_administrator, data: []});
     }
     callback({isError: false, error: "", data: user});
   })
