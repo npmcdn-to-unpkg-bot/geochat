@@ -28,5 +28,7 @@ module.exports = mongoose.model('User', new Schema({
     },
     authtokenexpiration: {
       type: Date,
-    }
+    },
+    latitude: String,
+    longitude: String,
 },{strict: true}));
