@@ -30,9 +30,7 @@ app.use('/session', session);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  res.status(404).send( {"isError": true, "error": "Method not found" });
 });
 
 // error handlers
@@ -41,23 +39,24 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    /*res.render('error', {
-      message: err.message,
-      error: err
-    });*/
+    res.status(500).send( {"isError": true, "error": err.message });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  /*res.render('error', {
-    message: err.message,
-    error: {}
-  });*/
+  res.status(500).send( {"isError": true, "error": err.message });
 });
+
+String.prototype.IsValidInput = function () {
+  if (this == null || this.length === 0) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 app.listen(config.server.port, function () {
   logs.info("Server is runnning on " + config.server.port);
