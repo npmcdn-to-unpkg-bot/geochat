@@ -42,7 +42,7 @@ UserService.prototype.Register = function (userInfo, callback) {
                         }
                         return;
                       }
-                      callback(null, {isError: false, error: "", data: user});
+                      callback(null, {isError: false, error: "", data: AppError.registration_successfull});
                       return;
                     });
                   }
@@ -57,7 +57,7 @@ UserService.prototype.Register = function (userInfo, callback) {
 };
 
 UserService.prototype.Login = function (loginInfo, callback) {
-  UserModel.findOne({'email': loginInfo.email, "password": util.Encrypt(loginInfo.password)}, function (err, user) {
+  UserModel.findOne({'email': loginInfo.email, "password": util.Encrypt(loginInfo.password)}, '-authtokenexpiration -__v -email -active -password', function (err, user) {
     if (err) {
       callback({isError: true, error: configtext.contact_administrator, data: []});
     }
@@ -69,5 +69,39 @@ UserService.prototype.Login = function (loginInfo, callback) {
       }
   })
 };
+
+UserService.prototype.FetchAllUsers = function(callback) {
+  UserModel.find({}, '-authtoken -password -active -address -authtokenexpiration -__v -email', function (err, users) {
+    if (err) {
+      callback({isError: true, error: configtext.contact_administrator, data: []});
+    }
+
+    if (users.length == 0) {
+      callback({isError: true, error: apperror.no_users, data: []});
+    }
+    else {
+      callback({isError: false, error: "", data: users});
+    }
+  });
+}
+
+UserService.prototype.IsValidAuthToken = function (authtoken, userid, callback) {
+  UserModel.findOne( {'authtoken': authtoken }, function (err, user) {
+    if (err) {
+      callback({isError: true, error: configtext.contact_administrator, data: []});
+    }
+      if (user != null) {
+        if (user._id.toString() === userid) {
+          callback({isError: false, error: "", data: user});
+        }
+        else {
+          callback({isError: true, error: apperror.invalid_auth_token, data: []});
+        }
+      }
+      else {
+        callback({isError: true, error: apperror.invalid_auth_token, data: []});
+      }
+  });
+}
 
 module.exports = UserService;

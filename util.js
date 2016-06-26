@@ -10,7 +10,7 @@ var options = {
   provider: 'google',
 
   httpAdapter: 'https',
-  apiKey: 'YOUR_API_KEY',
+  apiKey: 'AIzaSyBF9xb6TLxfTEji1O4UqL7rwZc16fQRctA',
   formatter: null
 };
 
