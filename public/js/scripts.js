@@ -3,6 +3,15 @@ $(document).ready(function () {
 
   var map, marker, localLat, localLon;
 
+  $.ajax({
+         url: "/users",
+         type: "POST",
+         beforeSend: function(xhr){xhr.setRequestHeader('apikey', '654321');},
+         success: function(data) {
+           initialize(data.data);
+         }
+  });
+
   $("#btnSearch").click(function () {
   if ($("#txtSearch").val() !== "") {
     $.ajax({
@@ -27,7 +36,7 @@ $(document).ready(function () {
   }
 });
 
-google.maps.event.addDomListener(window, 'load', function () { initialize(geousers.data)} );
+//google.maps.event.addDomListener(window, 'load', function () { initialize(geousers.data)} );
 
 function initialize(users) {
   var locations = [];
