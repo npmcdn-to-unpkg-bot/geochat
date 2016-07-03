@@ -98,8 +98,7 @@ String.prototype.IsValidInput = function () {
 }
 
 app.listen(config.server.port, function () {
-  logs.info("Server is runnning on " + config.server.port);
-  console.log("Server is runnning on " + config.server.port);
+  logs.info("Server is runnning on " + config.server.port + ". Environment " + app.get('env'));
 });
 
 module.exports = app;
