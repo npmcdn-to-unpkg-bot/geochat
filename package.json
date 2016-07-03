@@ -4,7 +4,8 @@
   "description": "Map to chat",
   "main": "server.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "set NODE_ENV=production && node server"
   },
   "repository": {
     "type": "git",
