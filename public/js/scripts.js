@@ -1,6 +1,5 @@
 
 $(document).ready(function () {
-  google.maps.event.addDomListener(window, 'load', function () { initialize(geousers.data)} );
 
   var map, marker, localLat, localLon;
 
@@ -27,6 +26,8 @@ $(document).ready(function () {
         });
   }
 });
+
+google.maps.event.addDomListener(window, 'load', function () { initialize(geousers.data)} );
 
 function initialize(users) {
   var locations = [];
