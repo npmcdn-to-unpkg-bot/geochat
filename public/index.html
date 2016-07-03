@@ -1,42 +1,67 @@
 <!DOCTYPE html>
-<html ng-app="rentHomeApp">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <base href="/"> -->
-    <title>Geochat</title>
-    <script type="text/javascript" src="js/lib/angular.min.js"></script>
-    <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
-    <script type="text/javascript" src="js/lib/angular-resource.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/services/homeservice.js"></script>
-    <script type="text/javascript" src="js/controllers/mainController.js"></script>
-    <script type="text/javascript" src="js/controllers/contactController.js"></script>
-    <script type="text/javascript" src="js/controllers/aboutController.js"></script>
-
-    <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-  </head>
-  <body>
-    <div class="container">
-      <!--Start: Header------------------------------->
-      <div class="page-header">
-        <h1>Geochat</h1>
-      </div>
-      <!--End: Header------------------------------->
-
-      <!--Start: Body Content------------------------------->
-        <div ng-view></div>
-      <!--End: Body Content------------------------->
-
+<html lang="en" ng-app="geoChat">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Geochat - Chat by location | Search and chat</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body ng-controller="myCtrl">
+<!-- begin template -->
+<div class="navbar navbar-custom navbar-fixed-top">
+ <div class="navbar-header"><a class="navbar-brand" href="/">Geochat</a>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
     </div>
-    <!--Start: Footer------------------------------->
-    <footer class="footer navbar-fixed-bottom">
-      <div class="container">
-          Rakesh Gupta
-      </div>
-    </footer>
-    <!--End: Footer------------------------------->
-  </body>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Login</a></li>
+        <li><a href="#">Register</a></li>
+        <li>&nbsp;</li>
+      </ul>
+      <form class="navbar-form">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group">
+            <!--<div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">By Location (e.g. Pune, India)</a></li>
+                <li><a href="#">By Name (e.g. Rakesh or Rakesh Gupta)</a></li>
+              </ul>
+            </div>-->
+            <input type="text" class="form-control" placeholder="search by name, location" id="txtSearch" name="txtSearch">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search" id="btnSearch" name="btnSearch"></span> </span>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+
+<div id="map-canvas">
+</div>
+<div class="container-fluid" id="main">
+  <div class="row">
+    <div class="col-xs-12"><!--map-canvas will be postioned here--></div>
+
+  </div>
+</div>
+<!-- end template -->
+
+	<!-- script references -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBF9xb6TLxfTEji1O4UqL7rwZc16fQRctA" type="text/javascript"></script>
+		<script src="js/scripts.js"></script>
+		<script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/chat-config.js"></script>
+	</body>
 </html>

@@ -1,2 +1,2 @@
 # geochat
-find someone on the map to chat
+find someone on the map to chat - In progress...

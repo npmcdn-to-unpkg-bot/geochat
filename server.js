@@ -31,6 +31,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var authAPIKey = function (req, res, next) {
+  if (req.get("apikey") == null) {
+    res.status(401).send( {"isError": true, "error": AppError.unauth_access });
+  } else if (!req.get("apikey") === "654321") {
+    res.status(200).send( {"isError": true, "error": AppError.invalid_inputs_provided });
+  }
+  else {
+    next();
+  }
+}
+
 //Start: Auth Token function to be passed with the method when required
 var authTokenCheck = function (req, res, next) {
   if (req.get("authtoken") == null) {
@@ -53,7 +64,8 @@ var authTokenCheck = function (req, res, next) {
 //End: Auth Token function to be passed with the method when required
 
 app.use('/session', session);
-app.use('/users', authTokenCheck, users);
+//app.use('/users', authTokenCheck, users);
+app.use('/users', authAPIKey, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

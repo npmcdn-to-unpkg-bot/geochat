@@ -104,4 +104,19 @@ UserService.prototype.IsValidAuthToken = function (authtoken, userid, callback) 
   });
 }
 
+UserService.prototype.Search = function(searchinput, callback) {
+  UserModel.find({"firstname": {'$regex': searchinput} }, '-authtoken -password -active -address -authtokenexpiration -__v -email', function (err, users) {
+    if (err) {
+      callback({isError: true, error: configtext.contact_administrator, data: []});
+    }
+
+    if (users.length == 0) {
+      callback({isError: true, error: apperror.no_users, data: []});
+    }
+    else {
+      callback({isError: false, error: "", data: users});
+    }
+  });
+}
+
 module.exports = UserService;
