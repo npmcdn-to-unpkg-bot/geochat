@@ -5,7 +5,7 @@ module.exports = {
         "mongodb": "mongodb://localhost/geochat"
     },
     "server": {
-    	"port": "3000"
+    	"port": "8080"
     },
     "log": {
       "path": "logs/logs.log"
