@@ -1,9 +1,15 @@
-var assert = require('chai').assert;
-describe('Array', function() {
-  describe('#indexOf()', function () {
-    it('should return -1 when the value is not present', function () {
-      assert.equal(-1, [1,2,3].indexOf(5));
-      assert.equal(-1, [1,2,3].indexOf(0));
+require("blanket")({ /* optional options */ });
+var chai = require('chai');
+var expect = require('chai').expect;
+var should = require('chai').should();
+
+describe('Basic TDD', function() {
+  describe('TDD TEST', function () {
+    it('10 should be 10', function () {
+      expect(10).to.be.equal(10);
+    });
+    it('basic number check', function () {
+      expect(10).to.be.a('Number');
     });
   });
 });
